@@ -1,5 +1,5 @@
-# Smart Home Inventory Manager
- This project is dedicated to creating a Smart Home Inventory Manager to help people manage their inventories
+# Smart Home Inventory Manager for Telegram
+ This Repo is for Smart Home Inventory Manager for Telegram
 
 # Telegram
 Find the Bot on telegram! @SHIM_Tele_Bot
