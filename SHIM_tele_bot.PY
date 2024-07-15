@@ -31,7 +31,7 @@ API_URL = 'https://smart-home-inventory-manager-4pzu2nxpd-w-zheng-jies-projects.
 start - Starts the bot
 help - Provides help for SHIM Tele Bot
 
-add-room - Adds a new room or space
+add-room - Adds a new room / space
 add-SubSpace - Adds a new sub-space
 additem - Adds a new item
 
