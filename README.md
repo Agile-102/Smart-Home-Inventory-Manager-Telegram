@@ -9,12 +9,12 @@ Find the Bot on Telegram! [@SHIM_Tele_Bot](https://t.me/SHIM_Tele_Bot)
 
 * `/start` - Initiate contact with SHIM Bot.
 * `/help` - View available functions.
-* `/additem` - Add a new item to your inventory.
-* `/add-room` - Add a new room / space.
-* `/add-SubSpace` - Add a new sub-space.
-* `/view` - Get all spaces and sub-spaces.
-* `/remove-item` - Remove an item by ID.
+* `/add_room` - Add a new room.
+* `/add_subspace` - Add a new sub-space.
+* `/additem` - Add a new item.
+* `/view` - View all spaces and sub-spaces.
 * `/delete` - Delete a space or sub-space by ID.
+* `/remove_item` - Remove an item by ID.
 <!-- * `/get` - Retrieve all items in your inventory. -->
 
 ## Working on this Repo
