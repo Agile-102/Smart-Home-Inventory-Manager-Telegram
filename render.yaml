@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: shim-telegram-bot
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python SHIM_tele_bot.PY
+    ports:
+      - port: 10000
+        targetPort: 3000
+    healthCheckPath: /

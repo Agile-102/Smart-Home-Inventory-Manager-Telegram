@@ -24,7 +24,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 
 TOKEN = '7056035301:AAGfskXNZ6JxZjxOt0yjcDvaegZ3zcUMO9Q'
 BOT_USERNAME: Final = '@SHIM_Tele_Bot'
-API_URL = 'https://smart-home-inventory-manager-ht6vqwtnw-w-zheng-jies-projects.vercel.app'
+API_URL = 'https://smart-home-inventory-manager-ht6vqwtnw-w-zheng-jies-projects.vercel.app/api'
 
 # Commands
 """
@@ -33,11 +33,6 @@ help - Provides help for SHIM Tele Bot
 add_room - Adds a new room / space
 view_rooms - View all rooms / spaces for the user
 """
-response = requests.get(API_URL)
-if response.status_code == 200:
-    print("Endpoint connected")
-else:
-    print(f"Failed to connect. Status code: {response.status_code}, Response: {response.text}")
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text('Hello! I am SHIM Bot! Select /help for more info!')
@@ -53,7 +48,7 @@ async def handle_add_room_message(update: Update, context: ContextTypes.DEFAULT_
     user_id = str(update.message.from_user.id)
     try:
         headers = {'Content-Type': 'application/json'}
-        response = requests.post(f'{API_URL}/api/spaces', json={'user_id': user_id, 'space_name': room_name}, headers=headers)
+        response = requests.post(f'{API_URL}/spaces', json={'user_id': user_id, 'space_name': room_name}, headers=headers)
 
         if response.status_code == 201:
             await update.message.reply_text('Room added successfully!')
@@ -69,7 +64,7 @@ async def view_rooms_command(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
     # Sending data to the API for retrieving rooms
     try:
-        response = requests.get(f'{API_URL}/api/spaces', params={'user_id': user_id})
+        response = requests.get(f'{API_URL}/spaces', params={'user_id': user_id})
 
         if response.status_code == 200:
             try:
