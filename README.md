@@ -1,6 +1,6 @@
 # Smart Home Inventory Manager for Telegram
 
-This repository is for the Smart Home Inventory Manager Telegram Bot.
+This repository is for the Smart Home Inventory Manager Telegram Bot. Deployed on Render.
 
 ## Telegram
 Find the Bot on Telegram! [@SHIM_Tele_Bot](https://t.me/SHIM_Tele_Bot)
@@ -11,11 +11,13 @@ Find the Bot on Telegram! [@SHIM_Tele_Bot](https://t.me/SHIM_Tele_Bot)
 * `/help` - View available functions.
 * `/add_room` - Add a new room.
 * `/add_subspace` - Add a new sub-space.
+  
+<!--
 * `/additem` - Add a new item.
 * `/view` - View all spaces and sub-spaces.
 * `/delete` - Delete a space or sub-space by ID.
 * `/remove_item` - Remove an item by ID.
-<!-- * `/get` - Retrieve all items in your inventory. -->
+ -->
 
 ## Working on this Repo
 1. Copy the repo into your working dir to get started
@@ -26,6 +28,10 @@ Find the Bot on Telegram! [@SHIM_Tele_Bot](https://t.me/SHIM_Tele_Bot)
     ```
     pip install python-telegram-bot requests
     ```
+3. Make sure to update and track changes before adding, commiting and pushing to repo with:
+   ```
+    git pull
+    ```
 
 ## Running the Bot
 Run the script with the following command:
@@ -33,4 +39,11 @@ Run the script with the following command:
 python SHIM_tele_bot.PY
 ```
 
-<!-- send test / test2 to SHIM Bot for debug tests -->
+
+## About Render Free Usage
+
+Render spins down a Free web service that goes 15 minutes without receiving inbound traffic. Render spins the service back up whenever it next receives a request to process.
+
+Spinning up a service takes up to a minute, which causes a noticeable delay for incoming requests until the service is back up and running. For example, a browser page load will hang temporarily.
+
+More information on usage limits such as outbound bandwidth and build pipeline minutes available at: https://docs.render.com/free
