@@ -58,4 +58,5 @@ More information on usage limits such as outbound bandwidth and build pipeline m
 spaCy is a free, open-source library for advanced Natural Language Processing (NLP) in Python. It’s designed specifically for production use and helps you build applications that process and “understand” large volumes of text. It can be used to build information extraction or natural language understanding systems.
 
 More information on spaCy available at: https://spacy.io/
+<br>
 spaCy API Docs: https://spacy.io/api
