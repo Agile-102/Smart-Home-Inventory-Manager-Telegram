@@ -21,6 +21,10 @@ import requests
 from typing import Final
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
+import spacy
+
+# Load the English NLP model
+nlp = spacy.load('en_core_web_sm')
 
 TOKEN = '7056035301:AAGfskXNZ6JxZjxOt0yjcDvaegZ3zcUMO9Q'
 BOT_USERNAME: Final = '@SHIM_Tele_Bot'
@@ -141,6 +145,44 @@ async def handle_add_subspace_message(update: Update, context: ContextTypes.DEFA
     else:
         await update.message.reply_text('Please start the /add_subspace command first.')
 
+def extract_intent_and_entities(text):
+    doc = nlp(text)
+    intent = None
+    room_name = None
+    
+    # Check if the text implies an 'add room' action
+    if 'add' in text.lower() and 'room' in text.lower():
+        intent = 'add_room'
+    
+    # Extract possible room names from entities
+    for ent in doc.ents:
+        if ent.label_ in {'ORG', 'GPE', 'FACILITY', 'LOC'}:  # Adjust labels based on use case
+            room_name = ent.text
+    
+    # Additional check for room name not captured by NER
+    if not room_name:
+        tokens = [token.text for token in doc if not token.is_stop and not token.is_punct]
+        # Assume the last significant token could be the room name
+        if tokens:
+            room_name = tokens[-1]
+
+    return intent, room_name
+
+async def add_room_with_name(update: Update, context: ContextTypes.DEFAULT_TYPE, room_name: str):
+    user_id = str(update.message.from_user.id)
+    try:
+        headers = {'Content-Type': 'application/json'}
+        response = requests.post(f'{API_URL}/spaces', json={'user_id': user_id, 'space_name': room_name}, headers=headers)
+
+        if response.status_code == 201:
+            await update.message.reply_text(f'Room "{room_name}" added successfully!')
+        else:
+            print(f'Failed to add room. Status code: {response.status_code}, Response: {response.text}')
+            await update.message.reply_text(f'Failed to add room "{room_name}". Please check the details and try again.')
+    except Exception as e:
+        print(f'Exception occurred: {e}')
+        await update.message.reply_text('An error occurred while adding the room.')
+
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text.strip()
 
@@ -150,8 +192,14 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif context.user_data.get('awaiting_room'):
         await handle_add_room_message(update, context)
     else:
-        # Default behavior
-        await update.message.reply_text("Please use a command to interact with the bot.")
+        # Use spaCy to extract intent and entities
+        intent, room_name = extract_intent_and_entities(text)
+        
+        if intent == 'add_room' and room_name:
+            # Call the function to add a room with the extracted name
+            await add_room_with_name(update, context, room_name)
+        else:
+            await update.message.reply_text("I couldn't understand that. Please use a command or specify the action clearly.")
 
 async def error(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print(f'Update {update} caused error {context.error}')

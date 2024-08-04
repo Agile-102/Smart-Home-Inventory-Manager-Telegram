@@ -28,7 +28,12 @@ Find the Bot on Telegram! [@SHIM_Tele_Bot](https://t.me/SHIM_Tele_Bot)
     ```
     pip install python-telegram-bot requests
     ```
-3. Make sure to update and track changes before adding, commiting and pushing to repo with:
+3. Logic engine (spaCy) installation:
+   ```
+    pip install spacy
+    python -m spacy download en_core_web_sm
+    ```
+4. Make sure to update and track changes before adding, commiting and pushing to repo with:
    ```
     git pull
     ```
@@ -47,3 +52,10 @@ Render spins down a Free web service that goes 15 minutes without receiving inbo
 Spinning up a service takes up to a minute, which causes a noticeable delay for incoming requests until the service is back up and running. For example, a browser page load will hang temporarily.
 
 More information on usage limits such as outbound bandwidth and build pipeline minutes available at: https://docs.render.com/free
+
+## About Logic Engine: spaCy
+
+spaCy is a free, open-source library for advanced Natural Language Processing (NLP) in Python. It’s designed specifically for production use and helps you build applications that process and “understand” large volumes of text. It can be used to build information extraction or natural language understanding systems.
+
+More information on spaCy available at: https://spacy.io/
+spaCy API Docs: https://spacy.io/api
